@@ -35,3 +35,22 @@ In the section called "Network", create a new Key AND set the value all in one l
 Save the INI file to the system
 
 `ini.Save("C:\\tmp\\settings.ini");`
+
+# Class Structure
+```
+IniParser/
+  ├─ Document.cs          ← Root controller (load, save, merge, compare)
+  ├─ Section.cs           ← Section-level API (keys management)
+  ├─ Key.cs               ← Key-level API (value editing)
+  |
+  ├─ IniLine.cs           ← Line-level representation (lossless)
+  └─ LineType.cs          ← Line classification enum
+```
+
+# Document Structure
+```
+Document
+  ├─ List<IniLine>        ← Source of truth (lossless)
+  └─ Dictionary<Section>  ← Fast semantic access
+        └─ Dictionary<Key>
+```
